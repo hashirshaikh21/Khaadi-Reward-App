@@ -15,9 +15,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    // Load mock user data for UI/UX development
+    // Retrieve customerId from AuthProvider and fetch profile
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<UserProvider>(context, listen: false).fetchUserProfile();
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final customerId = authProvider.token;
+      if (customerId != null) {
+        Provider.of<UserProvider>(context, listen: false).fetchUserProfile(customerId);
+      }
     });
   }
 
@@ -123,6 +127,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       _buildProfileItem('Name', user.name),
                                       const SizedBox(height: 8),
                                       _buildProfileItem('Phone', user.phone),
+                                      const SizedBox(height: 8),
+                                      _buildProfileItem('Email', user.email),
+                                      const SizedBox(height: 8),
+                                      _buildProfileItem('Position', user.position),
+                                      const SizedBox(height: 8),
+                                      _buildProfileItem('Department', user.department),
                                     ],
                                   ),
                                 ),

@@ -11,12 +11,12 @@ class UserProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  Future<void> fetchUserProfile() async {
+  Future<void> fetchUserProfile(String customerId) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
     try {
-      _user = await ApiService.getProfile();
+      _user = await ApiService.getProfile(customerId);
     } catch (e) {
       _errorMessage = 'Failed to load profile.';
     }

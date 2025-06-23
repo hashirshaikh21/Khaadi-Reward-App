@@ -17,13 +17,18 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isQrCodeVisible = false;
   Timer? _timer;
   int _countdownSeconds = 20;
+  String? customerId;
 
   @override
   void initState() {
     super.initState();
-    // Load mock user data for UI/UX development
+    // Retrieve customerId from AuthProvider and fetch profile
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<UserProvider>(context, listen: false).fetchUserProfile();
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      customerId = authProvider.token;
+      if (customerId != null) {
+        Provider.of<UserProvider>(context, listen: false).fetchUserProfile(customerId!);
+      }
     });
   }
 

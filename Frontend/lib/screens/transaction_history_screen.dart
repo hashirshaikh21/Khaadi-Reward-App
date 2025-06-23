@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import '../services/api_service.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 
 class TransactionHistoryScreen extends StatefulWidget {
   const TransactionHistoryScreen({super.key});
@@ -10,7 +12,7 @@ class TransactionHistoryScreen extends StatefulWidget {
 }
 
 class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
-  late Future<List<Transaction>> _transactionsFuture;
+  Future<List<Transaction>>? _transactionsFuture;
   List<Transaction> _allTransactions = [];
   List<Transaction> _filteredTransactions = [];
   
@@ -20,19 +22,28 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   DateTime? _endDate;
   
   final List<String> _filterOptions = ['All', 'Credit', 'Debit'];
+  String? customerId;
 
   @override
   void initState() {
     super.initState();
-    _loadTransactions();
+    // Retrieve customerId from AuthProvider and load transactions
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      customerId = authProvider.token;
+      if (customerId != null) {
+        _loadTransactions();
+      }
+    });
   }
 
   Future<void> _loadTransactions() async {
-    _transactionsFuture = ApiService.getTransactions();
+    if (customerId == null) return;
+    _transactionsFuture = ApiService.getTransactions(customerId!);
     final transactions = await _transactionsFuture;
     setState(() {
-      _allTransactions = transactions;
-      _filteredTransactions = transactions;
+      _allTransactions = (transactions ?? <Transaction>[]);
+      _filteredTransactions = (transactions ?? <Transaction>[]);
     });
   }
 
@@ -266,6 +277,9 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                 child: FutureBuilder<List<Transaction>>(
                   future: _transactionsFuture,
                   builder: (context, snapshot) {
+                    if (_transactionsFuture == null) {
+                      return const Center(child: Text('No transactions to display.'));
+                    }
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {

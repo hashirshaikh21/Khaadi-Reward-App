@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ayesh\\Full Stack\\WeavesProject\\Backend\\WeavesProject\\WeavesProject.csproj": {}
+    "C:\\Users\\hashi\\Khaadi-Reward-App\\Backend\\WeavesProject\\WeavesProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ayesh\\Full Stack\\WeavesProject\\Backend\\WeavesProject\\WeavesProject.csproj": {
+    "C:\\Users\\hashi\\Khaadi-Reward-App\\Backend\\WeavesProject\\WeavesProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ayesh\\Full Stack\\WeavesProject\\Backend\\WeavesProject\\WeavesProject.csproj",
+        "projectUniqueName": "C:\\Users\\hashi\\Khaadi-Reward-App\\Backend\\WeavesProject\\WeavesProject.csproj",
         "projectName": "WeavesProject",
-        "projectPath": "C:\\Users\\ayesh\\Full Stack\\WeavesProject\\Backend\\WeavesProject\\WeavesProject.csproj",
-        "packagesPath": "C:\\Users\\ayesh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ayesh\\Full Stack\\WeavesProject\\Backend\\WeavesProject\\obj\\",
+        "projectPath": "C:\\Users\\hashi\\Khaadi-Reward-App\\Backend\\WeavesProject\\WeavesProject.csproj",
+        "packagesPath": "C:\\Users\\hashi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hashi\\Khaadi-Reward-App\\Backend\\WeavesProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ayesh\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\hashi\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"

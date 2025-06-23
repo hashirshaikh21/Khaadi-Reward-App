@@ -13,9 +13,9 @@ class Transaction {
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
-      id: json['id'] ?? '',
-      date: DateTime.parse(json['date']),
-      description: json['description'] ?? '',
+      id: json['transId']?.toString() ?? '',
+      date: DateTime.parse(json['createdAt']),
+      description: json['type'] ?? '',
       amount: json['amount'] ?? 0,
     );
   }
